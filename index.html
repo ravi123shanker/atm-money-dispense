@@ -1,0 +1,83 @@
+<html>
+<head>
+<title>ATM Money Dispenser</title>
+<style>
+.bold{
+    font-weight: bold;
+    font-size: 20px;
+}
+.notes{
+    font-weight: 600;
+    color: black;
+    font-size: 18px;
+}
+</style>
+<script>
+var totalNotes = 0;
+function dispenseMoney(){
+    totalNotes = 0
+    var moneyInput=document.getElementById("myMoneyInput").value;
+ 	var dispenseAmount = parseInt(moneyInput);
+ 	if(isNaN(dispenseAmount) || !Number.isInteger(dispenseAmount || dispenseAmount < 0 )){
+		alert("Invalid input, please check");
+	}else{
+		dispenseAmount = parseInt(moneyInput);
+   		dispenseAmount = calculateCurrencyCount(dispenseAmount , 2000, "note2000");
+   		dispenseAmount = calculateCurrencyCount(dispenseAmount , 500, "note500");
+   		dispenseAmount = calculateCurrencyCount(dispenseAmount , 200, "note200");
+   		dispenseAmount = calculateCurrencyCount(dispenseAmount , 100, "note100");
+  		dispenseAmount = calculateCurrencyCount(dispenseAmount , 50, "note50");
+  		dispenseAmount = calculateCurrencyCount(dispenseAmount , 20, "note20");
+   		dispenseAmount = calculateCurrencyCount(dispenseAmount , 10, "note10");
+   		dispenseAmount = calculateCurrencyCount(dispenseAmount , 5, "note5");
+  		dispenseAmount = calculateCurrencyCount(dispenseAmount , 2, "note2");
+  		dispenseAmount = calculateCurrencyCount(dispenseAmount , 1, "note1");
+   		document.getElementById("totalNotes").innerHTML = totalNotes;   
+	 }
+}
+function calculateCurrencyCount(dispenseAmount, note, spanId){
+  	var noteCount = parseInt(dispenseAmount/note);
+  	if(noteCount >= 1){
+     		totalNotes += noteCount;
+     		dispenseAmount = dispenseAmount%note;
+   	}
+   	document.getElementById(spanId).innerHTML = noteCount;   
+   	return dispenseAmount;
+}
+</script>
+</head>
+<body>
+    <div style="background-color:#4D52C5;color: white; height: 100px; display: flex; justify-content: center; align-items: center;margin: 20px;">
+        <h1>ATM Money Dispenser</h1>
+    </div>
+    <div style="display: flex; justify-content: center; background-color: #eeeeee;margin: 20px;">
+        <div style="width:50%;margin: 10px;display: flex; justify-content: center;align-items: center;">
+            <div style="background-color: white;width: 100%; padding-bottom: 20px; height: 250px;">
+                <h3  style="font-weight: bold; font-size: 25px; text-align: center;">Welcome to ATM</h3>
+                <div style="text-align: center;margin-top: 20px;">
+                    <div style="text-align: left;"><label  style="margin-left: 10%; color: gray;">Enter the amount</label></div>
+                    <input type="text" id="myMoneyInput" placeholder="Amount" style="margin-top: 10px;width: 80%; color: black; text-align: right; padding: 10px;">
+                    <br><br>
+                    <button style="margin-top: 10px;background-color: #4455dd; width: 80%;height: 40px;color: white; border: none; font-weight: bold;" onclick="dispenseMoney();">Get Money</button>
+                </div>
+            </div>
+        </div>
+        <div style="width:50%;margin: 10px;">
+            <h4  style="margin-left:10px;">You will get following amount</h5>
+            <hr>
+            <span class="notes" style="margin-left: 15%;"  id="note1">0</span> of Re 1 <span  class="notes" style="margin-left: 17%;" id="note2">0</span> of Rs 2
+            <hr>
+            <span  class="notes" style="margin-left: 15%;"  id="note5">0</span> of Rs 5 <span  class="notes" style="margin-left: 17%;"  id="note10">0</span> of Rs 10
+            <hr>
+            <span  class="notes" style="margin-left: 15%;"  id="note20">0</span> of Rs 20 <span  class="notes" style="margin-left: 16%;"  id="note50">0</span> of Rs 50
+            <hr>
+            <span  class="notes" style="margin-left: 15%;"  id="note100">0</span> of Rs 100 <span  class="notes" style="margin-left: 15%;"  id="note200">0</span> of Rs 200
+            <hr>
+            <span class="notes"  style="margin-left: 15%;"  id="note500">0</span> of Rs 500 <span  class="notes" style="margin-left: 15%;"  id="note2000">0</span> of Rs 2000
+            <hr>
+            <h4 style="margin-left:10px;">Total notes dispensed: <span id="totalNotes">0</span></h5>
+            <hr>
+        </div>
+    </div>
+</body>
+</html>
